@@ -1,18 +1,14 @@
-import React from 'react';
-import { Button } from '../ui/button';
 import Image from 'next/image';
 
-type ButtonProps = {
+import { Button } from './ui/button';
+
+interface ButtonProps {
   isLoading: boolean;
   className?: string;
   children: React.ReactNode;
-};
+}
 
-export default function SubmitButton({
-  isLoading,
-  className,
-  children,
-}: ButtonProps) {
+const SubmitButton = ({ isLoading, className, children }: ButtonProps) => {
   return (
     <Button
       type="submit"
@@ -35,4 +31,6 @@ export default function SubmitButton({
       )}
     </Button>
   );
-}
+};
+
+export default SubmitButton;
