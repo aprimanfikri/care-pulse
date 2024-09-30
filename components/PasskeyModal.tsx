@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 import {
   AlertDialog,
@@ -12,24 +12,24 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+} from '@/components/ui/alert-dialog';
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@/components/ui/input-otp";
-import { decryptKey, encryptKey } from "@/lib/utils";
+} from '@/components/ui/input-otp';
+import { decryptKey, encryptKey } from '@/lib/utils';
 
 export const PasskeyModal = () => {
   const router = useRouter();
   const path = usePathname();
   const [open, setOpen] = useState(false);
-  const [passkey, setPasskey] = useState("");
-  const [error, setError] = useState("");
+  const [passkey, setPasskey] = useState('');
+  const [error, setError] = useState('');
 
   const encryptedKey =
-    typeof window !== "undefined"
-      ? window.localStorage.getItem("accessKey")
+    typeof window !== 'undefined'
+      ? window.localStorage.getItem('accessKey')
       : null;
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export const PasskeyModal = () => {
     if (path)
       if (accessKey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY!.toString()) {
         setOpen(false);
-        router.push("/admin");
+        router.push('/admin');
       } else {
         setOpen(true);
       }
@@ -46,7 +46,7 @@ export const PasskeyModal = () => {
 
   const closeModal = () => {
     setOpen(false);
-    router.push("/");
+    router.push('/');
   };
 
   const validatePasskey = (
@@ -57,11 +57,11 @@ export const PasskeyModal = () => {
     if (passkey === process.env.NEXT_PUBLIC_ADMIN_PASSKEY) {
       const encryptedKey = encryptKey(passkey);
 
-      localStorage.setItem("accessKey", encryptedKey);
+      localStorage.setItem('accessKey', encryptedKey);
 
       setOpen(false);
     } else {
-      setError("Invalid passkey. Please try again.");
+      setError('Invalid passkey. Please try again.');
     }
   };
 
