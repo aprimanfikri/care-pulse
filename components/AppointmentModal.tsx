@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -10,12 +10,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Appointment } from "@/types/appwrite.types";
+} from '@/components/ui/dialog';
+import { Appointment } from '@/types/appwrite.types';
 
-import { AppointmentForm } from "./forms/AppointmentForm";
+import { AppointmentForm } from './forms/AppointmentForm';
 
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
 
 export const AppointmentModal = ({
   patientId,
@@ -26,7 +26,7 @@ export const AppointmentModal = ({
   patientId: string;
   userId: string;
   appointment?: Appointment;
-  type: "schedule" | "cancel";
+  type: 'schedule' | 'cancel' | 'create';
   title: string;
   description: string;
 }) => {
@@ -37,7 +37,9 @@ export const AppointmentModal = ({
       <DialogTrigger asChild>
         <Button
           variant="ghost"
-          className={`capitalize ${type === "schedule" && "text-green-500"}`}
+          className={`capitalize ${
+            type === 'schedule' ? 'text-green-500' : 'text-red-500'
+          }`}
         >
           {type}
         </Button>
@@ -46,7 +48,7 @@ export const AppointmentModal = ({
         <DialogHeader className="mb-4 space-y-3">
           <DialogTitle className="capitalize">{type} Appointment</DialogTitle>
           <DialogDescription>
-            Please fill in the following details to {type} appointment
+            Please fill in the following details to {type} an appointment
           </DialogDescription>
         </DialogHeader>
 

@@ -42,7 +42,7 @@ export const PasskeyModal = () => {
       } else {
         setOpen(true);
       }
-  }, [encryptedKey]);
+  }, [encryptedKey, router, path]);
 
   const closeModal = () => {
     setOpen(false);

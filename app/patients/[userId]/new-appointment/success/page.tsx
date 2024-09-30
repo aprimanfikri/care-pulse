@@ -42,20 +42,24 @@ export default async function Success({
             Your <span className="text-green-500">appointment request</span> has
             been successfully submitted!
           </h2>
-          <p>We'll be in touch shortly to confirm.</p>
+          <p>We&apos;ll be in touch shortly to confirm.</p>
         </section>
 
         <section className="request-details">
           <p>Requested appointment details:</p>
           <div className="flex items-center gap-3">
-            <Image
-              src={doctor?.image!}
-              alt="doctor"
-              width={100}
-              height={100}
-              className="size-6"
-            />
-            <p className="whitespace-nowrap">Dr. {doctor?.name!}</p>
+            {doctor?.image && (
+              <Image
+                src={doctor.image}
+                alt="doctor"
+                width={100}
+                height={100}
+                className="size-6"
+              />
+            )}
+            {doctor?.name && (
+              <p className="whitespace-nowrap">Dr. {doctor.name}</p>
+            )}
           </div>
           <div className="flex gap-2">
             <Image

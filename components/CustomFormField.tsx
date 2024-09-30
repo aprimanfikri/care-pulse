@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { E164Number } from 'libphonenumber-js/core';
 import Image from 'next/image';
 import ReactDatePicker from 'react-datepicker';
@@ -28,7 +27,7 @@ export enum FormFieldType {
 }
 
 interface CustomProps {
-  control: Control<any>;
+  control: Control<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
   name: string;
   label?: string;
   placeholder?: string;
@@ -38,11 +37,13 @@ interface CustomProps {
   dateFormat?: string;
   showTimeSelect?: boolean;
   children?: React.ReactNode;
-  renderSkeleton?: (field: any) => React.ReactNode;
+  renderSkeleton?: (field: any) => React.ReactNode; // eslint-disable-line @typescript-eslint/no-explicit-any
   fieldType: FormFieldType;
 }
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+
   switch (props.fieldType) {
     case FormFieldType.INPUT:
       return (
@@ -119,10 +120,7 @@ const RenderInput = ({ field, props }: { field: any; props: CustomProps }) => {
             <ReactDatePicker
               showTimeSelect={props.showTimeSelect ?? false}
               selected={field.value}
-              onChange={(
-                date: Date | null,
-                event?: React.MouseEvent | React.KeyboardEvent
-              ) => field.onChange(date)}
+              onChange={(date: Date | null) => field.onChange(date)}
               timeInputLabel="Time:"
               dateFormat={props.dateFormat ?? 'MM/dd/yyyy'}
               wrapperClassName="date-picker"

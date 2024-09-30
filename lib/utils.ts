@@ -5,12 +5,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const parseStringify = (value: any) => {
   if (!value) {
     return null;
   }
   return JSON.parse(JSON.stringify(value));
 };
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export const convertFileToUrl = (file: File) => URL.createObjectURL(file);
 

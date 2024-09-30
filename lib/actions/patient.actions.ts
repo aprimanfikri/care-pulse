@@ -27,7 +27,9 @@ export const createUser = async (user: CreateUserParams) => {
     );
 
     return parseStringify(newuser);
+    /* eslint-disable @typescript-eslint/no-explicit-any */
   } catch (error: any) {
+    /* eslint-enable @typescript-eslint/no-explicit-any */
     if (error && error?.code === 409) {
       const existingUser = await users.list([
         Query.equal('email', [user.email]),
@@ -92,16 +94,13 @@ export const registerPatient = async ({
 
 export const getPatient = async (userId: string) => {
   try {
-    const patientsData = await databases.listDocuments(
+    const patients = await databases.listDocuments(
       DATABASE_ID!,
-      PATIENT_COLLECTION_ID!
+      PATIENT_COLLECTION_ID!,
+      [Query.equal('userId', [userId])]
     );
 
-    const patients = patientsData.documents.find(
-      (doc) => doc.userId === userId
-    );
-
-    return parseStringify(patients);
+    return parseStringify(patients.documents[0]);
   } catch (error) {
     console.error(
       'An error occurred while retrieving the patient details:',
