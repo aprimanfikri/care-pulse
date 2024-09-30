@@ -92,22 +92,20 @@ export const registerPatient = async ({
 
 export const getPatient = async (userId: string) => {
   try {
-    const patients = await databases.listDocuments(
+    const patientsData = await databases.listDocuments(
       DATABASE_ID!,
-      PATIENT_COLLECTION_ID!,
-      [Query.equal('userId', [userId])]
+      PATIENT_COLLECTION_ID!
     );
 
-    if (!patients.documents || patients.documents.length === 0) {
-      return null;
-    }
+    const patients = patientsData.documents.find(
+      (doc) => doc.userId === userId
+    );
 
-    return parseStringify(patients.documents[0]);
+    return parseStringify(patients);
   } catch (error) {
     console.error(
       'An error occurred while retrieving the patient details:',
       error
     );
-    return null;
   }
 };
